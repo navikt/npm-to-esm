@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+const { readFile } = require('fs');
 const { execSync } = require('child_process');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
@@ -16,6 +17,22 @@ const version = argv.v;
 const entry = argv.entry;
 const shouldIncludeDependencies = argv.includeDependencies;
 const shouldCleanupWorkingDirectory = argv.cleanup;
+const importMapFile = argv.importMap;
+
+let importMap = null;
+readFile(importMapFile, 'utf-8', function (error, data) {
+    if (error) {
+        logger.error('Unable to read importMap file', error);
+        process.exit();
+    }
+    try {
+        importMap = JSON.parse(data);
+        logger.info(`Import map parsed`);
+    } catch (error) {
+        logger.error(`Provided import-map at ${importMapFile} does not contain valid JSON`);
+        process.exit();
+    }
+});
 
 if (!packageName) {
     logger.error('Please specify package with --package <argument>');
@@ -43,7 +60,7 @@ getNPMPackage({ name: packageName, version, entry }).then(({ inputPath, folder }
         logger.info('--------------------------------------------------');
     }
 
-    convertCommonJsToESMAndWriteToDisk(inputPath, outputFile, folder).then(
+    convertCommonJsToESMAndWriteToDisk(inputPath, outputFile, folder, importMap).then(
         () => {
             logger.success(`\nGreat success! Open ${outputFile} to see end result`);
 
@@ -85,6 +102,6 @@ getNPMPackage({ name: packageName, version, entry }).then(({ inputPath, folder }
                 });
             }
         },
-        (error) => console.log('Something went wrong', error)
+        (error) => logger.error('Something went wrong', error)
     );
 });

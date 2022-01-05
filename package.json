@@ -6,7 +6,7 @@
     "npm-to-esm": "./bin/index.js"
   },
   "scripts": {
-    "npm-to-esm": "node ./bin/index.js --package react --v 17.0.2 --entry ./cjs/react.production.min.js --cleanup"
+    "npm-to-esm": "node ./bin/index.js --package react-dom --v 17.0.2 --entry ./cjs/react-dom.production.min.js --cleanup --importMap import-map.json"
   },
   "keywords": [],
   "author": "NAV",
