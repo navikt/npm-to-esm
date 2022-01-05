@@ -1,0 +1,10 @@
+module.exports = {
+    maps: [
+        {
+            imports: {
+                react: 'http://localhost:8080/react-v17/index.esm.js',
+                'react-dom': 'http://localhost:8080/react-dom-v17/index.esm.js',
+            },
+        },
+    ],
+};

@@ -1,0 +1,29 @@
+{
+  "name": "npm-to-esm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "npm-to-esm": "./bin/index.js"
+  },
+  "scripts": {
+    "npm-to-esm": "node ./bin/index.js --package react --v 17.0.2 --entry ./cjs/react.production.min.js --cleanup"
+  },
+  "keywords": [],
+  "author": "NAV",
+  "license": "MIT",
+  "dependencies": {
+    "@eik/rollup-plugin": "^4.0.9",
+    "@rollup/plugin-commonjs": "^22.0.0-4",
+    "@rollup/plugin-node-resolve": "^13.1.2",
+    "@rollup/plugin-replace": "^3.0.1",
+    "axios": "^0.24.0",
+    "chalk": "^4.1.2",
+    "compressing": "^1.5.1",
+    "make-dir": "^3.1.0",
+    "nanoid": "^3.1.30",
+    "nodemon": "^2.0.14",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.63.0",
+    "yargs": "^17.3.1"
+  }
+}
