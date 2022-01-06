@@ -5,7 +5,6 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const replace = require('@rollup/plugin-replace');
 
 const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap) => {
-    const shouldUseImportMap = !!importMap;
     const plugins = [];
     plugins.push(
         replace({
@@ -14,6 +13,7 @@ const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap) => 
         })
     );
 
+    const shouldUseImportMap = !!importMap;
     if (shouldUseImportMap) {
         plugins.push(importmap({ maps: [{ imports: importMap }] }));
     }
