@@ -26,7 +26,7 @@ Usage example:
 | `--v <version>` | Version of the desired package | required | | |
 | `--entry <path to entrypoint>` | Custom entrypoint to build from (relative to root of the specified package) | optional | | |
 | `--includeDependencies` | Whether or not to include dependencies of the module | optional | | |
-| `--importMap <path to file>` | Import map | optional | `{ "react": "https://<my-cool-cdn>/react.esm.js" }` |
+| `--importMap <path to file>` | Import map | optional | | `{ "react": "https://<my-cool-cdn>/react.esm.js" }` |
 | `--cleanup` | Whether or not to delete the temporary directory from the file system once script is done. Prompts to confirm deletion before deleting it. | optional | | |
 | `--outputFile <path to file>` | Where to output the finished bundle | optional | `./index.js` | |
 
