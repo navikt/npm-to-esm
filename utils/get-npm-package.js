@@ -27,15 +27,15 @@ function getPackageUrl({ name, version }) {
     return packageUrl;
 }
 
-async function makeTemporaryFolder() {
+async function makeTemporaryDirectory() {
     const tmp = tmpdir();
-    const folderPath = `${tmp}/${nanoid()}`;
-    const folder = await makeDir(folderPath);
-    return folder;
+    const directoryPath = `${tmp}/${nanoid()}`;
+    const directory = await makeDir(directoryPath);
+    return directory;
 }
 
 async function unpack(buffer) {
-    const mappe = await makeTemporaryFolder();
+    const mappe = await makeTemporaryDirectory();
     await compressing.tgz.uncompress(buffer, mappe);
     return mappe;
 }
@@ -53,13 +53,13 @@ function findEsmEntrypoint(pkg) {
 
 async function getNPMPackage({ name, version, entry }) {
     const package = await getPackage({ name, version });
-    const folder = await unpack(package);
-    const pkgJsonPath = `${folder}/package/package.json`;
+    const directory = await unpack(package);
+    const pkgJsonPath = `${directory}/package/package.json`;
     const pkgJsonBuffer = await readFile(pkgJsonPath, 'utf-8');
     const pkgJsonData = JSON.parse(pkgJsonBuffer);
     const entrypoint = entry || findEsmEntrypoint(pkgJsonData);
-    const inputPath = path.join(folder, 'package', entrypoint);
-    return { inputPath, folder };
+    const inputPath = path.join(directory, 'package', entrypoint);
+    return { inputPath, directory };
 }
 
 module.exports = getNPMPackage;

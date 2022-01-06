@@ -22,11 +22,11 @@ function runNpmInstallInPackageDirectory(cwd) {
 
 async function prepareNpmPackage(packageName, version, entry, shouldIncludeDependencies) {
     try {
-        const { inputPath, folder } = await getNpmPackage({ name: packageName, version, entry });
+        const { inputPath, directory } = await getNpmPackage({ name: packageName, version, entry });
         if (shouldIncludeDependencies) {
-            await runNpmInstallInPackageDirectory(folder);
+            await runNpmInstallInPackageDirectory(directory);
         }
-        return { inputPath, folder };
+        return { inputPath, directory };
     } catch (error) {
         throw error;
     }
