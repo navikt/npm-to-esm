@@ -15,10 +15,10 @@ You may want to include the dependencies of the module you are fetching in the E
 # Getting started
 
 To install the package from the NPM registry:
-`npm install -g @navikt/npm-to-esm`
+```npm install -g @navikt/npm-to-esm```
 
 Usage example:
-`npm-to-esm --package @navikt/ds-react --v 0.14.3-beta.1 --entry ./esm/index.js`
+```npm-to-esm --package @navikt/ds-react --v 0.14.3-beta.1 --entry ./esm/index.js```
 
 ## Options
 
