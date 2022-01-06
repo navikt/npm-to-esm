@@ -4,7 +4,7 @@ const { hideBin } = require('yargs/helpers');
 const argv = yargs(hideBin(process.argv)).argv;
 const logger = require('./../utils/logger');
 const verifyArguments = require('../utils/verify-arguments');
-const convertCommonJsToESMAndWriteToDisk = require('./../utils/cjs-to-esm');
+const makeEsmBundle = require('../utils/make-esm-bundle');
 const prepareNpmPackage = require('./../utils/prepare-npm-package');
 const cleanup = require('../utils/cleanup');
 
@@ -22,7 +22,7 @@ verifyArguments(argv).then(
                 shouldIncludeDependencies
             );
 
-            await convertCommonJsToESMAndWriteToDisk(inputPath, outputFile, directory, importMap);
+            await makeEsmBundle(inputPath, outputFile, directory, importMap);
             logger.success(`\nGreat success! Open ${outputFile} to see end result`);
 
             if (shouldCleanupWorkingDirectory) {

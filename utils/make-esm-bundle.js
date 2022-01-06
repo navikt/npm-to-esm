@@ -38,7 +38,7 @@ const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap) => 
     };
 };
 
-async function convertCommonJsToESMAndWriteToDisk(inputFile, outputFile, folder, importMap) {
+async function makeEsmBundle(inputFile, outputFile, folder, importMap) {
     const rollupOptions = getRollupOptions(inputFile, outputFile, folder, importMap);
     const bundle = await rollup.rollup(rollupOptions);
     await bundle.generate(rollupOptions.output);
@@ -46,4 +46,4 @@ async function convertCommonJsToESMAndWriteToDisk(inputFile, outputFile, folder,
     await bundle.close();
 }
 
-module.exports = convertCommonJsToESMAndWriteToDisk;
+module.exports = makeEsmBundle;
