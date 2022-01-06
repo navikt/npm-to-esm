@@ -1,5 +1,4 @@
 #! /usr/bin/env node
-const { execSync } = require('child_process');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const rimraf = require('rimraf');
@@ -7,30 +6,22 @@ const readline = require('readline');
 const argv = yargs(hideBin(process.argv)).argv;
 const logger = require('./../utils/logger');
 const verifyArguments = require('../utils/verify-arguments');
-const getNPMPackage = require('./../utils/get-npm-package');
 const convertCommonJsToESMAndWriteToDisk = require('./../utils/cjs-to-esm');
+const prepareNpmPackage = require('./../utils/prepare-npm-package');
 
 verifyArguments(argv).then(
-    (arguments) => {
-        const { packageName, version, entry, shouldCleanupWorkingDirectory, shouldIncludeDependencies, } = arguments;
+    async (arguments) => {
+        const { packageName, version, entry, shouldCleanupWorkingDirectory, shouldIncludeDependencies } = arguments;
         const importMap = !!arguments.importMap ? arguments.importMap : null;
         const outputFile = `./index.esm.js` || argv.outputFile;
 
-        getNPMPackage({ name: packageName, version, entry }).then(({ inputPath, folder }) => {
-            const cwd = folder;
-
-            const pkgDirectory = `${cwd}/package`;
-            logger.info('Current working directory:', cwd);
-
-            if (shouldIncludeDependencies) {
-                logger.info('--------------------------------------------------');
-                logger.info('Executing npm install in current working directory');
-                logger.info('...');
-                execSync('npm install', { cwd: pkgDirectory });
-                logger.info('Done');
-                logger.info('--------------------------------------------------');
-            }
-
+        try {
+            const { inputPath, folder } = await prepareNpmPackage(
+                packageName,
+                version,
+                entry,
+                shouldIncludeDependencies
+            );
             convertCommonJsToESMAndWriteToDisk(inputPath, outputFile, folder, importMap).then(
                 () => {
                     logger.success(`\nGreat success! Open ${outputFile} to see end result`);
@@ -54,7 +45,7 @@ verifyArguments(argv).then(
                         rl.question('Answer: ', function (answer) {
                             if (answer === 'yes') {
                                 rimraf(
-                                    cwd,
+                                    folder,
                                     {
                                         disableGlob: true,
                                     },
@@ -75,7 +66,10 @@ verifyArguments(argv).then(
                 },
                 (errorMessage, errorObject) => logger.error(errorMessage, errorObject)
             );
-        });
+        } catch (error) {
+            logger.error(error);
+            process.exit();
+        }
     },
     (error) => {
         logger.error(error);
