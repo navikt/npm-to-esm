@@ -14,12 +14,12 @@ class Logger {
     }
 
     warn(msg, ...args) {
-        console.error(chalk.yellow(msg), ...args)
+        console.error(chalk.yellow(msg), ...args);
     }
 
     warnBold(msg, ...args) {
-        console.error(chalk.yellow.bold(msg), ...args)
+        console.error(chalk.yellow.bold(msg), ...args);
     }
 }
 
-module.exports = Logger;
+module.exports = new Logger();
