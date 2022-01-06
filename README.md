@@ -2,6 +2,8 @@
 
 `npm-to-esm` is a utility for making ESM bundles out of npm-modules fetched off of the npm registry located at registry.npmjs.org.
 
+## Description
+
 It does this by fetching a specified NPM-module from the registry to your file system, and using a specified entrypoint, it runs the contents of the module through a Rollup build that is setup and executed [here](https://github.com/navikt/npm-to-esm), putting the resulting contents in an outputFile of your choice (or `./index.esm.js` from where you are running it by default). 
 
 It has been tested using modules that are on CommonJS and ESM formats respectively. However, _it should be considered a best-effort and it may not work for your use-case_ - this util is still very much a work in progress.
