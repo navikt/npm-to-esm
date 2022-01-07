@@ -32,7 +32,6 @@
     "compressing": "^1.5.1",
     "make-dir": "^3.1.0",
     "nanoid": "^3.1.30",
-    "promise": "^8.1.0",
     "rollup": "^2.63.0",
     "yargs": "^17.3.1"
   }

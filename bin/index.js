@@ -7,29 +7,24 @@ const verifyArguments = require('../utils/verify-arguments');
 const makeEsmBundle = require('../utils/make-esm-bundle');
 const prepareNpmPackage = require('./../utils/prepare-npm-package');
 
-verifyArguments(argv).then(
-    async (arguments) => {
+(async () => {
+    try {
+        const arguments = await verifyArguments(argv);
         const { packageName, version, entry, shouldIncludeDependencies } = arguments;
         const importMap = !!arguments.importMap ? arguments.importMap : null;
         const outputFile = arguments.outputFile || './index.esm.js';
 
-        try {
-            const { inputPath, directory } = await prepareNpmPackage(
-                packageName,
-                version,
-                entry,
-                shouldIncludeDependencies
-            );
+        const { inputPath, directory } = await prepareNpmPackage(
+            packageName,
+            version,
+            entry,
+            shouldIncludeDependencies
+        );
 
-            await makeEsmBundle(inputPath, outputFile, directory, importMap);
-            logger.success(`\nGreat success! Open ${outputFile} to see end result`);
-        } catch (error) {
-            logger.error(error);
-            process.exit();
-        }
-    },
-    (error) => {
+        await makeEsmBundle(inputPath, outputFile, directory, importMap);
+        logger.success(`\nGreat success! Open ${outputFile} to see end result`);
+    } catch (error) {
         logger.error(error);
-        process.exit();
+        process.exit(1);
     }
-);
+})();

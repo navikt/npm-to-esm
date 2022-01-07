@@ -1,4 +1,3 @@
-const Promise = require('promise');
 const readImportMap = require('./read-import-map');
 
 function getCommonArguments(argv) {
@@ -11,27 +10,23 @@ function getCommonArguments(argv) {
     };
 }
 
-function verifyArguments(argv) {
-    return new Promise((resolve, reject) => {
-        const commonArguments = getCommonArguments(argv);
-        if (!commonArguments.packageName) {
-            reject('Please specify package with --package <argument>');
-        }
+async function verifyArguments(argv) {
+    const commonArguments = getCommonArguments(argv);
+    if (!commonArguments.packageName) {
+        throw 'Please specify package with --package <argument>';
+    }
 
-        if (!commonArguments.version) {
-            reject('Please specify version with --v <argument>');
-        }
+    if (!commonArguments.version) {
+        throw 'Please specify version with --v <argument>';
+    }
 
-        const importMapFile = argv.importMap;
-        const shouldUseImportMap = !!importMapFile;
-        if (shouldUseImportMap) {
-            readImportMap(importMapFile).then((importMap) => {
-                resolve({ ...commonArguments, importMap });
-            }, reject);
-        } else {
-            resolve(commonArguments);
-        }
-    });
+    const importMapFile = argv.importMap;
+    const shouldUseImportMap = !!importMapFile;
+    if (shouldUseImportMap) {
+        const importMap = await readImportMap(importMapFile);
+        return { ...commonArguments, importMap };
+    }
+    return commonArguments;
 }
 
 module.exports = verifyArguments;
