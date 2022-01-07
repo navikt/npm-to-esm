@@ -7,7 +7,7 @@ async function runNpmInstallInPackageDirectory(cwd) {
     const packageDirectory = `${cwd}/package`;
     logger.info('--------------------------------------------------');
     logger.info(`Executing npm install in package directory (${packageDirectory})`);
-    logger.info('...');
+    logger.info('.....');
     await exec('npm install', { cwd: packageDirectory });
     logger.info('Done');
     logger.info('--------------------------------------------------');

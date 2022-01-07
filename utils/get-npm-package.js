@@ -8,16 +8,12 @@ const path = require('path');
 
 async function getPackage({ name, version }) {
     const packageUrl = getPackageUrl({ name, version });
-    try {
-        const { data } = await axios({
-            method: 'get',
-            url: packageUrl,
-            responseType: 'arraybuffer',
-        });
-        return Buffer.from(data, 'binary');
-    } catch (error) {
-        return error;
-    }
+    const { data } = await axios({
+        method: 'get',
+        url: packageUrl,
+        responseType: 'arraybuffer',
+    });
+    return Buffer.from(data, 'binary');
 }
 
 function getPackageUrl({ name, version }) {

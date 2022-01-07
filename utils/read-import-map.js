@@ -10,7 +10,7 @@ async function readImportMap(importMapFilePath) {
         const data = await readFile(importMapFilePath, { encoding: 'utf8' });
         return JSON.parse(data);
     } catch (error) {
-        throw `Unable to read importMap JSON file at ${importMapFilePath}\n${error}`;
+        throw `Unable to read importMap JSON file at ${importMapFilePath} (either due to file missing or file contents not being valid JSON). See below for error.\n${error}`;
     }
 }
 
