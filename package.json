@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "NAV",
   "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
   "dependencies": {
     "@eik/rollup-plugin": "^4.0.9",
     "@rollup/plugin-commonjs": "^22.0.0-4",
@@ -22,7 +25,6 @@
     "compressing": "^1.5.1",
     "make-dir": "^3.1.0",
     "nanoid": "^3.1.30",
-    "nodemon": "^2.0.14",
     "promise": "^8.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.63.0",
