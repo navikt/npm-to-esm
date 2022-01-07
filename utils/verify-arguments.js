@@ -7,7 +7,6 @@ function getCommonArguments(argv) {
         version: argv.v,
         entry: argv.entry,
         shouldIncludeDependencies: argv.includeDependencies,
-        shouldCleanupWorkingDirectory: argv.cleanup,
         outputFile: argv.outputFile
     };
 }
