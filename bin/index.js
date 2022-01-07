@@ -12,7 +12,7 @@ verifyArguments(argv).then(
     async (arguments) => {
         const { packageName, version, entry, shouldCleanupWorkingDirectory, shouldIncludeDependencies } = arguments;
         const importMap = !!arguments.importMap ? arguments.importMap : null;
-        const outputFile = `./index.esm.js` || argv.outputFile;
+        const outputFile = arguments.outputFile || './index.esm.js';
 
         try {
             const { inputPath, directory } = await prepareNpmPackage(
