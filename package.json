@@ -12,6 +12,10 @@
     "LICENSE.md",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/navikt/npm-to-esm"
+  },
   "scripts": {
     "dev": "nodemon --exec 'npm run npm-to-esm' --ignore './index.esm.js'",
     "npm-to-esm": "node ./bin/index.js --packageName react-dom --packageVersion 17.0.2 --importMap ./import-map.json"
