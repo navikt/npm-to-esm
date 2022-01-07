@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "dev": "nodemon --exec 'npm run npm-to-esm' --ignore './index.esm.js'",
-    "npm-to-esm": "node ./bin/index.js --package react-dom --v 17.0.2 --entry ./cjs/react-dom.production.min.js --importMap ./import-map.json --includeDependencies"
+    "npm-to-esm": "node ./bin/index.js --packageName react-dom --packageVersion 17.0.2 --importMap ./import-map.json"
   },
   "keywords": [],
   "author": "NAV",

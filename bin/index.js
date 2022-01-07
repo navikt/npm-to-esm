@@ -1,26 +1,53 @@
 #! /usr/bin/env node
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
-const argv = yargs(hideBin(process.argv)).argv;
 const logger = require('./../utils/logger');
-const verifyArguments = require('../utils/verify-arguments');
 const makeEsmBundle = require('../utils/make-esm-bundle');
 const prepareNpmPackage = require('./../utils/prepare-npm-package');
+const readImportMap = require('./../utils/read-import-map');
 
 (async () => {
     try {
-        const arguments = await verifyArguments(argv);
-        const { packageName, version, entry, shouldIncludeDependencies } = arguments;
-        const importMap = !!arguments.importMap ? arguments.importMap : null;
-        const outputFile = arguments.outputFile || './index.esm.js';
+        const argv = await yargs(hideBin(process.argv))
+            .option('packageName', {
+                type: 'string',
+                description: 'The desired package from NPM registry',
+                alias: 'p',
+            })
+            .option('packageVersion', {
+                type: 'string',
+                description: 'Version of the desired package',
+                alias: 'v',
+            })
+            .option('entry', {
+                type: 'string',
+                description: 'Custom entrypoint to build from (relative to root of the specified package)',
+                alias: 'e',
+            })
+            .option('includeDependencies', {
+                type: 'boolean',
+                description: 'Whether or not to include dependencies of the module',
+            })
+            .option('importMap', {
+                type: 'string',
+                description: 'Import map',
+                coerce: readImportMap
+            })
+            .option('outputFile', {
+                type: 'string',
+                description: 'Where to output the finished bundle',
+                default: './index.esm.js',
+            })
+            .demandOption(['packageName', 'packageVersion'])
+            .parseAsync();
 
+        const { packageName, packageVersion, entry, includeDependencies, importMap, outputFile } = argv;
         const { inputPath, directory } = await prepareNpmPackage(
             packageName,
-            version,
+            packageVersion,
             entry,
-            shouldIncludeDependencies
+            includeDependencies
         );
-
         await makeEsmBundle(inputPath, outputFile, directory, importMap);
         logger.success(`\nGreat success! Open ${outputFile} to see end result`);
     } catch (error) {
