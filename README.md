@@ -26,7 +26,7 @@ Usage example:
 | `--packageVersion <version>` | Version of the desired package | required | | |
 | `--entry <path to entrypoint>` | Custom entrypoint to build from (relative to root of the specified package) | optional | | |
 | `--includeDependencies` | Whether or not to include dependencies of the package in the resulting ESM bundle | optional | | |
-| `--importMap <path to file>` | Import map. Uses [this rollup-plugin](https://www.npmjs.com/package/@eik/rollup-plugin) to translate imports to use specified URLs instead (see example). Takes precedence over `--includeDependencies` for imports included in the import map. | optional | | `{ "react": "https://<my-cool-cdn>/react.esm.js" }` |
+| `--importMap <path to file>` | Path to a file containing an import map in valid JSON format. Uses [this rollup-plugin](https://www.npmjs.com/package/@eik/rollup-plugin) to translate imports to use specified URLs instead (see example). Takes precedence over `--includeDependencies` for imports included in the import map. | optional | | `{ "react": "https://<my-cool-cdn>/react.esm.js" }` |
 | `--outputFile <path to file>` | Where to output the finished bundle | optional | `./index.js` | |
 
 ---
