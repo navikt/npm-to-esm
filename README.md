@@ -37,4 +37,4 @@ Questions regarding the code may be asked as issues to this GitHub repository.
 
 ## For NAV-employees
 
-Interne henvendelser kan sendes via Slack i kanalen #frontendplattform.
+Interne henvendelser kan sendes via Slack i kanalen #personbruker-teknisk.
