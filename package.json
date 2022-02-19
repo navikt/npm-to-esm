@@ -10,6 +10,7 @@
     "utils",
     "CODEOWNERS",
     "package.json",
+    "npm-to-esm.js",
     "LICENSE.md",
     "README.md"
   ],
