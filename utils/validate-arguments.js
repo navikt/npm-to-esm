@@ -1,6 +1,6 @@
 const yargs = require('yargs/yargs');
-const { hideBin } = require("yargs/helpers");
-const readImportMap = require("./read-import-map");
+const { hideBin } = require('yargs/helpers');
+const readImportMap = require('./read-import-map');
 
 module.exports = async function validateArguments(completeArgList, shouldHideBin) {
     const argList = shouldHideBin ? hideBin(completeArgList) : completeArgList;
