@@ -2,9 +2,8 @@
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const logger = require('./../utils/logger');
-const makeEsmBundle = require('../utils/make-esm-bundle');
-const prepareNpmPackage = require('./../utils/prepare-npm-package');
 const readImportMap = require('./../utils/read-import-map');
+const runNpmToEsm = require('../utils/run-npm-to-esm');
 
 (async () => {
     try {
@@ -31,7 +30,7 @@ const readImportMap = require('./../utils/read-import-map');
             .option('importMap', {
                 type: 'string',
                 description: 'Import map',
-                coerce: readImportMap
+                coerce: readImportMap,
             })
             .option('outputFile', {
                 type: 'string',
@@ -41,14 +40,8 @@ const readImportMap = require('./../utils/read-import-map');
             .demandOption(['packageName', 'packageVersion'])
             .parseAsync();
 
-        const { packageName, packageVersion, entry, includeDependencies, importMap, outputFile } = argv;
-        const { inputPath, directory } = await prepareNpmPackage(
-            packageName,
-            packageVersion,
-            entry,
-            includeDependencies
-        );
-        await makeEsmBundle(inputPath, outputFile, directory, importMap);
+        await runNpmToEsm(argv);
+        const outputFile = argv.outputFile;
         logger.success(`\nGreat success! Open ${outputFile} to see end result`);
     } catch (error) {
         logger.error(error);

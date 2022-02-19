@@ -4,6 +4,7 @@
   "bin": {
     "npm-to-esm": "./bin/index.js"
   },
+  "main": "./npm-to-esm.js",
   "files": [
     "bin",
     "utils",
