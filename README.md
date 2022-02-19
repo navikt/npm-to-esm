@@ -18,13 +18,13 @@ Usage example:
 
 ```npm-to-esm --packageName @navikt/ds-react --packageVersion 0.14.3-beta.1 --entry ./esm/index.js```
 
-Or require it in Node.js and provide options as an argument:
+You may also require it from Node.js and provide options as an argument:
 
 ```
 const npmToEsm = require('@navikt/npm-to-esm');
 
 async function myFunction() {
-    await npmToEsm({ 
+    const rollupOutput = await npmToEsm({ 
         packageName: '@navikt/ds-react', 
         packageVersion: '0.16.8'
         // ... other options
