@@ -4,3 +4,4 @@ package-lock.json
 .idea
 index.esm.js
 .DS_Store
+tester.js

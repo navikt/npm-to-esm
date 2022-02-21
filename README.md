@@ -18,6 +18,20 @@ Usage example:
 
 ```npm-to-esm --packageName @navikt/ds-react --packageVersion 0.14.3-beta.1 --entry ./esm/index.js```
 
+You may also require it from Node.js and provide options as an argument:
+
+```
+const npmToEsm = require('@navikt/npm-to-esm');
+
+async function myFunction() {
+    const rollupOutput = await npmToEsm({ 
+        packageName: '@navikt/ds-react', 
+        packageVersion: '0.16.8'
+        // ... other options
+    })
+}
+```
+
 ## Options
 
 | Option | Description | Required / Optional | Default value | Example |

@@ -42,8 +42,9 @@ async function makeEsmBundle(inputFile, outputFile, folder, importMap) {
     const rollupOptions = getRollupOptions(inputFile, outputFile, folder, importMap);
     const bundle = await rollup.rollup(rollupOptions);
     await bundle.generate(rollupOptions.output);
-    await bundle.write(rollupOptions.output);
+    const rollupOutput = await bundle.write(rollupOptions.output);
     await bundle.close();
+    return rollupOutput;
 }
 
 module.exports = makeEsmBundle;
