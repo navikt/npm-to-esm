@@ -6,5 +6,5 @@ module.exports = async (options) => {
     const optionsArray = optionsObjectToArray(options);
     const validatedOptions = await validateArguments(optionsArray, false);
     validatedOptions.importMap = validatedOptions.importMap ?? options.importMap;
-    return await runNpmToEsm(validatedOptions);
+    return await runNpmToEsm(validatedOptions, options.replaceConfig);
 };

@@ -4,14 +4,23 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const replace = require('@rollup/plugin-replace');
 
-const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap) => {
+const defaultReplaceConfig = {
+    preventAssignment: true,
+    'process.env.NODE_ENV': JSON.stringify('production'),
+};
+
+const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap, replaceConfigArgument) => {
+    let replaceConfig = defaultReplaceConfig;
     const plugins = [];
-    plugins.push(
-        replace({
-            'process.env.NODE_ENV': JSON.stringify('production'),
-            preventAssignment: true,
-        })
-    );
+
+    if (replaceConfigArgument) {
+        replaceConfig = {
+            ...replaceConfig,
+            ...replaceConfigArgument,
+        };
+    }
+
+    plugins.push(replace(replaceConfig));
 
     const shouldUseImportMap = !!importMap;
     if (shouldUseImportMap) {
@@ -38,10 +47,9 @@ const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap) => 
     };
 };
 
-async function makeEsmBundle(inputFile, outputFile, folder, importMap) {
-    const rollupOptions = getRollupOptions(inputFile, outputFile, folder, importMap);
+async function makeEsmBundle(inputFile, outputFile, folder, importMap, replaceConfig) {
+    const rollupOptions = getRollupOptions(inputFile, outputFile, folder, importMap, replaceConfig);
     const bundle = await rollup.rollup(rollupOptions);
-    await bundle.generate(rollupOptions.output);
     const rollupOutput = await bundle.write(rollupOptions.output);
     await bundle.close();
     return rollupOutput;

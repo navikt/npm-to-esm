@@ -43,6 +43,39 @@ async function myFunction() {
 | `--importMap <path to file>` | Path to a file containing an import map in valid JSON format. Uses [this rollup-plugin](https://www.npmjs.com/package/@eik/rollup-plugin) to translate imports to use specified URLs instead (see example). Takes precedence over `--includeDependencies` for imports included in the import map. | optional | | `{ "react": "https://<my-cool-cdn>/react.esm.js" }` |
 | `--outputFile <path to file>` | Where to output the finished bundle | optional | `./index.js` | |
 
+### Replacing strings in output build
+
+If you want to modify the output of the rollup build before writing the contents to a file, the [rollup-build](https://github.com/navikt/npm-to-esm/blob/main/utils/make-esm-bundle.js) has been configured with usage of [rollup's replace plugin](https://www.npmjs.com/package/@rollup/plugin-replace), and providing a custom config object to this plugin is supported when using npm-to-esm from Node.js (please read the docs for @rollup/plugin-replace for how to configure it for your use case).
+
+Example:
+```
+const npmToEsm = require('@navikt/npm-to-esm');
+
+async function myFunction() {
+    const rollupOutput = await npmToEsm({ 
+        packageName: '@navikt/ds-react', 
+        packageVersion: '0.16.8'
+        replaceConfig: {
+            delimiters: ['', ''],
+            values: {
+                'process.env.NODE_ENV': JSON.stringify('production'),
+                'import { myNamedExport }': 'import myDefaultExport' 
+            }
+        }
+    })
+}
+```
+
+**Please note: The replace plugin does have a default configuration set up in the rollup build, regardless of whether npm-to-esm is being used from Node.js or CLI.**
+
+Currently, it is configured with this by default:
+```
+{
+    preventAssignment: true,
+    'process.env.NODE_ENV': JSON.stringify('production'),
+};
+```
+
 ---
 
 # Contact
