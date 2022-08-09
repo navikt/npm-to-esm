@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "nodemon --exec 'npm run npm-to-esm' --ignore './index.esm.js'",
-    "npm-to-esm": "node ./bin/index.js --packageName react-dom --packageVersion 18.2.0 --importMap ./import-map.json"
+    "npm-to-esm": "node ./bin/index.js --packageName react --packageVersion 18.2.0 --includeDependencies --importMap ./import-map.json --entry cjs/react.production.min.js"
   },
   "keywords": [],
   "author": "NAV",
