@@ -3,6 +3,7 @@ const importmap = require('@eik/rollup-plugin');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const replace = require('@rollup/plugin-replace');
+const { terser } = require("rollup-plugin-terser");
 
 const defaultReplaceConfig = {
     preventAssignment: true,
@@ -31,7 +32,8 @@ const getRollupOptions = (inputFile, outputFile, moduleDirectory, importMap, rep
         nodeResolve({
             moduleDirectories: [`${moduleDirectory}/package/node_modules`],
         }),
-        commonjs({})
+        commonjs({}),
+        terser()
     );
 
     return {
