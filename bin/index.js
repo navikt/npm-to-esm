@@ -1,7 +1,7 @@
 #! /usr/bin/env node
-const logger = require('./../utils/logger');
-const runNpmToEsm = require('../utils/run-npm-to-esm');
-const validateArguments = require('../utils/validate-arguments');
+const logger = require('../lib/utils/logger');
+const runNpmToEsm = require('../lib/run-npm-to-esm');
+const validateArguments = require('../lib/cli/validate-arguments');
 
 (async () => {
     try {

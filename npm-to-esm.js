@@ -1,6 +1,6 @@
-const runNpmToEsm = require('./utils/run-npm-to-esm');
-const validateArguments = require('./utils/validate-arguments');
-const optionsObjectToArray = require('./utils/options-object-to-array');
+const runNpmToEsm = require('./lib/run-npm-to-esm');
+const validateArguments = require('./lib/cli/validate-arguments');
+const optionsObjectToArray = require('./lib/utils/options-object-to-array');
 
 module.exports = async (options) => {
     const optionsArray = optionsObjectToArray(options);
