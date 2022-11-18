@@ -1,4 +1,4 @@
-const runNpmToEsm = require('./lib/run-npm-to-esm');
+const runNpmToEsm = require('./lib/run');
 const validateArguments = require('./lib/cli/validate-arguments');
 const optionsObjectToArray = require('./lib/utils/options-object-to-array');
 

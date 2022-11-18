@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 const logger = require('../lib/utils/logger');
-const runNpmToEsm = require('../lib/run-npm-to-esm');
+const runNpmToEsm = require('../lib/run');
 const validateArguments = require('../lib/cli/validate-arguments');
 
 (async () => {

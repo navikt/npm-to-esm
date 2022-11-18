@@ -1,16 +1,16 @@
 {
   "name": "@navikt/npm-to-esm",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "bin": {
     "npm-to-esm": "./bin/index.js"
   },
-  "main": "./npm-to-esm.js",
+  "main": "index.js",
   "files": [
     "bin",
     "lib/utils",
     "CODEOWNERS",
     "package.json",
-    "npm-to-esm.js",
+    "index.js",
     "LICENSE.md",
     "README.md"
   ],
@@ -19,8 +19,8 @@
     "url": "https://github.com/navikt/npm-to-esm"
   },
   "scripts": {
-    "dev": "nodemon --exec 'npm run npm-to-esm' --ignore './index.esm.js'",
-    "npm-to-esm": "node ./bin/index.js --packageName react --packageVersion 18.2.0 --includeDependencies --importMap ./lib/importmap/import-map.json --entry cjs/react.production.min.js"
+    "dev": "nodemon --exec 'npm run build' --ignore './index.esm.js'",
+    "build": "node ./bin/index.js --packageName react --packageVersion 18.2.0 --includeDependencies --importMap ./lib/importmap/import-map.json --entry cjs/react.production.min.js"
   },
   "keywords": [],
   "author": "NAV",
