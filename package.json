@@ -1,13 +1,13 @@
 {
   "name": "@navikt/npm-to-esm",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "bin": {
     "npm-to-esm": "./bin/index.js"
   },
   "main": "index.js",
   "files": [
     "bin",
-    "lib/utils",
+    "lib",
     "CODEOWNERS",
     "package.json",
     "index.js",
