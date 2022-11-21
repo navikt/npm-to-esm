@@ -1,6 +1,6 @@
 {
   "name": "@navikt/npm-to-esm",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "bin": {
     "npm-to-esm": "./bin/index.js"
   },
