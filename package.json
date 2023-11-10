@@ -32,7 +32,7 @@
     "@rollup/plugin-commonjs": "22.0.0-4",
     "@rollup/plugin-node-resolve": "13.1.2",
     "@rollup/plugin-replace": "3.0.1",
-    "axios": "0.24.0",
+    "axios": "1.6.0",
     "chalk": "4.1.2",
     "compressing": "1.5.1",
     "make-dir": "3.1.0",
